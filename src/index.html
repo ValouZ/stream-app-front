@@ -6,10 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stream app</title>
+  <link rel="stylesheet" href="assets/scss/main.scss">
 </head>
 
-<body>
-  <h1>HEllo World</h1>
+<body class="flex flex-col flex-aic flex-jcc">
+  <main class="main section-form flex flex-col flex-aic">
+    <form action="/" method="get" class="form-sign-in flex flex-col flex-ais">
+      <input class="item user input-form" type="text" id="user" name="user" placeholder="Nom d'utilisateur">
+      <input class="item password input-form" type="password" id="password" name="password" placeholder="Mot de passe">
+      <button>Se connecter</button>
+    </form>
+
+    <a class="link" href="/sign-up">Pas encore de compte ? Inscrivez vous</a>
+  </main>
 </body>
 
 </html>
