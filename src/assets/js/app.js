@@ -1,10 +1,5 @@
 redirection();
 
-
-let dcButton = document.querySelector("#app-dc");
-
-dcButton.addEventListener("click", dc);
-
 function redirection() {
   // permet de récupérer le dernier morceau de l'url
   let lastIndexofURN = document.location.href.lastIndexOf("/");
@@ -19,8 +14,11 @@ function redirection() {
   ) {
     // Si on n'est pas sur la page d'accueil
     if (!localStorage.getItem("token")) {
-      document.location.href = "/";
+      document.location.href = "/index.html";
     }
+
+    let dcButton = document.querySelector("#app-dc");
+    dcButton.addEventListener("click", dc);
   } else {
     // Si on est sur les autres pages
     if (localStorage.getItem("token")) {
@@ -30,5 +28,6 @@ function redirection() {
 }
 
 function dc() {
-  console.log(dcButton);
+  localStorage.removeItem("token");
+  document.location.href = "/index.html";
 }

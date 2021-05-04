@@ -26,9 +26,8 @@ function signUp() {
   fetch("http://localhost:8080/users/create", request)
     .then((response) => response.json())
     .then(function (data) {
-      console.log(data);
-      // if (data.token) {
-        // document.location.href="/index.html?created";
-      // }
+      if (data.username) {
+        document.location.href="/index.html?created";
+      }
     });
 }
