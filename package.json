@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/user.html src/index.html",
+    "start": "parcel src/channels.html src/live.html src/index.html",
     "build": "parcel build src/index.html"
   },
   "keywords": [],
@@ -13,5 +13,8 @@
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
     "sass": "^1.32.12"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
   }
 }

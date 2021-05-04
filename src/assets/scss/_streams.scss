@@ -1,0 +1,23 @@
+.section-streams{
+  width: 80%;
+  .stream{
+    width: 100%;
+    height: 150px;
+    background: $coralRed;
+    transition: 0.2s all ease;
+
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+
+    &:hover{
+      border-radius: 10px;
+      background: $brown;
+    }
+
+    &__user{
+      align-self: flex-end;
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.header {
+  padding-bottom: 50px;
+
+  nav {
+    justify-content: flex-end;
+
+    ul {
+      li {
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  .menu-link {
+    &:hover {
+      color: $brown;
+    }
+  }
+
+  .dc {
+    .button {
+      @include button($brown, $white);
+      padding: 5px 10px;
+    }
+  }
+}
