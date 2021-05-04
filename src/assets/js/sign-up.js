@@ -1,13 +1,13 @@
-const loginButton = document.getElementById("app-submit");
+const signUpButton = document.getElementById("app-submit");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
-loginButton.addEventListener("click", (e) => {
+signUpButton.addEventListener("click", (e) => {
   e.preventDefault();
-  login();
+  signUp();
 });
 
-function login() {
+function signUp() {
   let username = usernameInput.value,
     password = passwordInput.value;
 
@@ -23,13 +23,12 @@ function login() {
     headers: headers,
   };
 
-  fetch("http://localhost:8080/users/login", request)
+  fetch("http://localhost:8080/users/create", request)
     .then((response) => response.json())
     .then(function (data) {
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        console.log(localStorage.getItem("token"));
-        document.location.href="/user.html";
-      }
+      console.log(data);
+      // if (data.token) {
+        // document.location.href="/index.html?created";
+      // }
     });
 }
