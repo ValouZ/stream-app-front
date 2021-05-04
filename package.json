@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/user.html src/index.html",
+    "start": "parcel src/user.html src/stream.html src/index.html",
     "build": "parcel build src/index.html"
   },
   "keywords": [],

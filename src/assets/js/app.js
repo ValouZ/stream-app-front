@@ -52,6 +52,7 @@ function displayUserName() {
   fetch(api, request)
     .then((response) => response.json())
     .then(function (data) {
+      localStorage.setItem("username", data.username);
       userSpan.textContent = data.username;
     });
 }
