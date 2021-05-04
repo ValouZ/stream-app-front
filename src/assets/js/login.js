@@ -30,7 +30,7 @@ function login() {
         console.log(data)
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("token", data.token);
-        document.location.href="/user.html";
+        document.location.href="/channels.html";
       }
     });
 }

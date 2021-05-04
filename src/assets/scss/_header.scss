@@ -3,6 +3,18 @@
 
   nav {
     justify-content: flex-end;
+
+    ul {
+      li {
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  .menu-link {
+    &:hover {
+      color: $brown;
+    }
   }
 
   .dc {

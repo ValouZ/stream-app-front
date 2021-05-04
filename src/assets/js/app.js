@@ -4,7 +4,7 @@ function redirection() {
   // permet de récupérer le dernier morceau de l'url
   let lastIndexofURN = document.location.href.lastIndexOf("/");
   let slicedURN = document.location.href.slice(lastIndexofURN);
-
+  console.log(slicedURN);
   if (
     !(
       slicedURN === "/" ||
@@ -21,10 +21,17 @@ function redirection() {
     dcButton.addEventListener("click", dc);
 
     displayUserName();
+    let result = slicedURN.match(/\/live.html\?user=[a-zA-Z]+/g);
+    if (result) {
+      let streamerSpan = document.querySelector("#app-streamer");
+      let streamerNameIndex = window.location.search.lastIndexOf("=");
+      let streamerName = window.location.search.slice(streamerNameIndex + 1);
+      streamerSpan.textContent = streamerName;
+    }
   } else {
     // Si on est sur la page d'accueil
     if (localStorage.getItem("token")) {
-      document.location.href = "/user.html";
+      document.location.href = "/channels.html";
     }
   }
 }

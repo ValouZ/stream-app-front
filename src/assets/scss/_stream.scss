@@ -1,0 +1,17 @@
+.section-stream {
+  width: 100%;
+  height: calc( 56.25vw + 475px);
+  max-height: 100vh;
+  .video {
+    width: 100%;
+    height: 56.25vw;
+    border: 2px solid $white;
+    margin-bottom: 20px;
+  }
+
+  .chat{
+    height: calc(100% - 56.25vw - 20px);
+    width: 100%;
+    border: 2px solid $coralRed;
+  }
+}
