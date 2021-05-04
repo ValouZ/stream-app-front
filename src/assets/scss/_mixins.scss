@@ -1,0 +1,37 @@
+@mixin under-tablet {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+// 12 col
+@mixin wrap($col) {
+  width: 100%;
+  max-width: calc(calc(1170px / calc(12 / #{$col})) + 22%);
+  padding-right: 11%;
+  padding-left: 11%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+// 8 col
+@mixin wrap-mobile($col) {
+  width: 100%;
+  max-width: calc(calc(92% / calc(8 / #{$col})) + 8%);
+  padding-right: 4%;
+  padding-left: 4%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+@mixin button($bg, $c) {
+  border: none;
+  background: $bg;
+  color: $c;
+  font-family: "Montserrat Bold";
+
+  &:hover {
+    color: $bg;
+    background: $c;
+  }
+}

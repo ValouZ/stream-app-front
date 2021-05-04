@@ -27,8 +27,9 @@ function login() {
     .then((response) => response.json())
     .then(function (data) {
       if (data.token) {
+        console.log(data)
+        localStorage.setItem("userId", data.userId);
         localStorage.setItem("token", data.token);
-        console.log(localStorage.getItem("token"));
         document.location.href="/user.html";
       }
     });

@@ -19,8 +19,10 @@ function redirection() {
 
     let dcButton = document.querySelector("#app-dc");
     dcButton.addEventListener("click", dc);
+
+    displayUserName();
   } else {
-    // Si on est sur les autres pages
+    // Si on est sur la page d'accueil
     if (localStorage.getItem("token")) {
       document.location.href = "/user.html";
     }
@@ -30,4 +32,26 @@ function redirection() {
 function dc() {
   localStorage.removeItem("token");
   document.location.href = "/index.html";
+}
+
+function displayUserName() {
+  let token = localStorage.getItem("token");
+  let headers = {
+    "Content-type": "application/json; charset=UTF-8",
+  };
+  let authorization = JSON.stringify({ Authorization: "Bearer " + token });
+  let request = {
+    method: "GET",
+    headers: headers,
+    Authorization: authorization,
+  };
+  let idUser = localStorage.getItem("userId");
+  let api = "http://localhost:8080/users/" + idUser;
+  let userSpan = document.querySelector("#app-user");
+
+  fetch(api, request)
+    .then((response) => response.json())
+    .then(function (data) {
+      userSpan.textContent = data.username;
+    });
 }

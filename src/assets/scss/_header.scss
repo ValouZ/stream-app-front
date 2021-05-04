@@ -1,0 +1,15 @@
+.header {
+  padding-top: 20px;
+  padding-bottom: 50px;
+
+  nav {
+    justify-content: flex-end;
+  }
+
+  .dc {
+    .button {
+      @include button($brown, $white);
+      padding: 5px 10px;
+    }
+  }
+}
