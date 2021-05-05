@@ -4,14 +4,14 @@ displayUsers();
 
 function displayUsers() {
   let token = localStorage.getItem("token");
-  let headers = {
-    "Content-type": "application/json; charset=UTF-8",
-  };
-  let authorization = JSON.stringify({ Authorization: "Bearer " + token });
+  console.log("Token - " + token);
+  let authorization = "Bearer " + token;
+  let headers = new Headers();
+  headers.append("Content-type", "application/json; charset=UTF-8");
+  headers.append("Authorization", authorization);
   let request = {
     method: "GET",
     headers: headers,
-    Authorization: authorization,
   };
   let api = "http://localhost:8080/users";
 
@@ -30,6 +30,7 @@ function displayUsers() {
           let streamer = document.createElement("h2");
           streamer.classList.add("stream__user");
           let streamerContent = document.createTextNode(name);
+
           streamer.appendChild(streamerContent);
           stream.appendChild(streamer);
           streamsSection.appendChild(stream);

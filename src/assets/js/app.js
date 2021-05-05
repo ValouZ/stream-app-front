@@ -21,7 +21,8 @@ function redirection() {
     dcButton.addEventListener("click", dc);
 
     displayUserName();
-    let result = slicedURN.match(/\/live.html\?user=[a-zA-Z]+/g);
+
+    let result = slicedURN.match(/\/live.html\?user=[a-zA-Z1-9]+/g);
     if (result) {
       let streamerSpan = document.querySelector("#app-streamer");
       let streamerNameIndex = window.location.search.lastIndexOf("=");
@@ -43,14 +44,13 @@ function dc() {
 
 function displayUserName() {
   let token = localStorage.getItem("token");
-  let headers = {
-    "Content-type": "application/json; charset=UTF-8",
-  };
-  let authorization = JSON.stringify({ Authorization: "Bearer " + token });
+  let authorization = "Bearer " + token;
+  let headers = new Headers();
+  headers.append("Content-type", "application/json; charset=UTF-8");
+  headers.append("Authorization", authorization);
   let request = {
     method: "GET",
     headers: headers,
-    Authorization: authorization,
   };
   let idUser = localStorage.getItem("userId");
   let api = "http://localhost:8080/users/" + idUser;

@@ -27,10 +27,10 @@ function login() {
     .then((response) => response.json())
     .then(function (data) {
       if (data.token) {
-        console.log(data)
+        console.log(data);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("token", data.token);
-        document.location.href="/channels.html";
+        document.location.href = "/channels.html";
       }
     });
 }
