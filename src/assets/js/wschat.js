@@ -1,49 +1,53 @@
-console.log("wschat");
 const io = require("socket.io-client");
+const qs = require("qs");
 
-// console.log(localStorage.getItem("username"));
+const msg = document.querySelector("#msg");
+const submit = document.querySelector("#submit");
+const messages = document.querySelector("#messages");
 
-// $(function () {
-//   var socket = io();
+const username = localStorage.getItem("username");
+const userId = localStorage.getItem("userId");
+const room = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
 
-//   $("form").submit(function (e) {
-//     e.preventDefault();
-//     socket.emit("chat message", $("#msg").val());
-//     $("#msg").val("");
-//     return false;
-//   });
+const socket = io("http://localhost:8080", {
+  withCredentials: true,
+  "Access-Control-Allow-Credentials": true,
+});
 
-//   socket.on("chat message", function (msg) {
-//     $("#messages").append($("<p>").text(msg));
-//   });
-// });
+socket.emit("joinRoom", {
+  id: userId,
+  username: username,
+  room: room,
+});
 
-function chat() {
-  const socket = io("http://localhost:8080", {
-    withCredentials: true,
-    "Access-Control-Allow-Credentials": true,
-  });
-  const msg = document.querySelector("#msg");
-  const submit = document.querySelector("#submit");
-  const messages = document.querySelector("#messages");
+// Recupérer room et users
+socket.on("roomUsers", ({ room, users }) => {
+  console.log(users);
+  // ouptputRoomName(room);
+  outputUsers(users);
+});
 
-  submit.addEventListener("click", function (e) {
-    e.preventDefault();
-    username = localStorage.getItem("username");
-    socket.emit("chat message", { username: username, msg: msg.value });
-    msg.value = "";
-    return false;
-  });
+submit.addEventListener("click", function (e) {
+  e.preventDefault();
+  socket.emit("chat message", { username: username, msg: msg.value });
+  msg.value = "";
+  msg.focus();
+  return false;
+});
 
-  socket.on("chat message", function (msgObject) {
-    console.log(msgObject);
-    let p = document.createElement("p");
-    let msg = document.createTextNode(
-      msgObject.username + " : " + msgObject.msg
-    );
-    p.appendChild(msg);
-    messages.appendChild(p);
-  });
+socket.on("chat message", function (msgObject) {
+  console.log(msgObject);
+  let p = document.createElement("p");
+  let msg = document.createTextNode(msgObject.username + " : " + msgObject.msg);
+  p.appendChild(msg);
+  messages.appendChild(p);
+});
+
+// Ajout nom room à la page
+
+function outputUsers(users) {
+  //   userList.innerHTML = `
+  //     ${users.map((user) => `<li> ${user.username}</li>`).join('')}
+  // `;
+  console.log(users);
 }
-
-chat();

@@ -4,7 +4,6 @@ function redirection() {
   // permet de récupérer le dernier morceau de l'url
   let lastIndexofURN = document.location.href.lastIndexOf("/");
   let slicedURN = document.location.href.slice(lastIndexofURN);
-  console.log(slicedURN);
   if (
     !(
       slicedURN === "/" ||

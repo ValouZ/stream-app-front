@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
+    "qs": "^6.10.1",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1"
   }
