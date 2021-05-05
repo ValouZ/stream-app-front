@@ -18,18 +18,17 @@ socket.emit("joinRoom", {
   id: userId,
   username: username,
   room: room,
+  color: localStorage.getItem("color"),
 });
 
 // Recupérer room et users
 socket.on("roomUsers", ({ room, users }) => {
-  console.log(users);
-  // ouptputRoomName(room);
   outputUsers(users);
 });
 
 submit.addEventListener("click", function (e) {
   e.preventDefault();
-  socket.emit("chat message", { username: username, msg: msg.value });
+  socket.emit("chat message", msg.value);
   msg.value = "";
   msg.focus();
   return false;
@@ -38,12 +37,11 @@ submit.addEventListener("click", function (e) {
 socket.on("chat message", function (msgObject) {
   console.log(msgObject);
   let p = document.createElement("p");
-  let msg = document.createTextNode(msgObject.username + " : " + msgObject.msg);
-  p.appendChild(msg);
+  p.innerHTML = `<p> <span style=color:${msgObject.color}> ${msgObject.username}</span> : ${msgObject.msg} </p>`;
   messages.appendChild(p);
 
   //scroll down
-  messages.scrollTop=messages.scrollHeight;
+  messages.scrollTop = messages.scrollHeight;
 });
 
 // Ajout nom room à la page
@@ -52,5 +50,5 @@ function outputUsers(users) {
   //   userList.innerHTML = `
   //     ${users.map((user) => `<li> ${user.username}</li>`).join('')}
   // `;
-  console.log(users);
+  // console.log(users);
 }

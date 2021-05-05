@@ -20,14 +20,18 @@ function redirection() {
     let dcButton = document.querySelector("#app-dc");
     dcButton.addEventListener("click", dc);
 
-    displayUserName();
+    // Si on est sur la page channels
+    if (slicedURN == "/channels.html") {
+      displayUserName();
+    }
 
-    let result = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
-    if (result) {
+    let result = qs.parse(location.search, { ignoreQueryPrefix: true });
+    let room = result.room;
+
+    // Si on a un nom dans l'url
+    if (room) {
       let streamerSpan = document.querySelector("#app-streamer");
-      // let streamerNameIndex = window.location.search.lastIndexOf("=");
-      // let streamerName = window.location.search.slice(streamerNameIndex + 1);
-      streamerSpan.textContent = result;
+      streamerSpan.textContent = room;
     }
   } else {
     // Si on est sur la page d'accueil

@@ -1,0 +1,70 @@
+.section-user {
+  h1 {
+    margin-bottom: 25px;
+  }
+}
+
+.section-live {
+  width: 100%;
+  height: calc(56.25vw + 520px);
+  max-height: 100vh;
+  .video {
+    width: 100%;
+    height: 56.25vw;
+    border: 2px solid $white;
+    margin-bottom: 20px;
+  }
+
+  .chat {
+    height: 500px;
+    width: 100%;
+    background: lighten($color: $almostBlack, $amount: 5);
+    box-shadow: 0px 0px 25px lighten($color: $almostBlack, $amount: 10);
+    // overflow: scroll;
+
+    justify-content: flex-end;
+    min-height: 500px;
+
+    .button {
+      @include button($coralRed, $white);
+      padding: 5px 10px;
+    }
+
+    #messages {
+      overflow-y: scroll;
+      height: 100%;
+      margin-bottom: 20px;
+      padding-left: 10px;
+
+      p {
+        margin-bottom: 7px;
+
+        span {
+          font-family: "Montserrat Bold";
+        }
+      }
+    }
+
+    form {
+      justify-content: space-between;
+    }
+    .messagesend {
+      border: none;
+      font-family: "Montserrat Regular";
+      width: 100%;
+      padding: 0 5px;
+      transition: 0.3s;
+      outline: none;
+      border-radius: 5px 0 0 5px;
+
+      &:hover,
+      &:focus {
+        background: darken($color: $white, $amount: 10);
+      }
+    }
+
+    .button {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
