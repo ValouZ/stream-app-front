@@ -1,3 +1,4 @@
+const qs = require("qs");
 redirection();
 
 function redirection() {
@@ -21,12 +22,12 @@ function redirection() {
 
     displayUserName();
 
-    let result = slicedURN.match(/\/live.html\?user=[a-zA-Z1-9]+/g);
+    let result = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
     if (result) {
       let streamerSpan = document.querySelector("#app-streamer");
-      let streamerNameIndex = window.location.search.lastIndexOf("=");
-      let streamerName = window.location.search.slice(streamerNameIndex + 1);
-      streamerSpan.textContent = streamerName;
+      // let streamerNameIndex = window.location.search.lastIndexOf("=");
+      // let streamerName = window.location.search.slice(streamerNameIndex + 1);
+      streamerSpan.textContent = result;
     }
   } else {
     // Si on est sur la page d'accueil
