@@ -41,6 +41,9 @@ socket.on("chat message", function (msgObject) {
   let msg = document.createTextNode(msgObject.username + " : " + msgObject.msg);
   p.appendChild(msg);
   messages.appendChild(p);
+
+  //scroll down
+  messages.scrollTop=messages.scrollHeight;
 });
 
 // Ajout nom room à la page

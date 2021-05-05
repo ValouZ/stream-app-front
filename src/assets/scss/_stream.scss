@@ -13,5 +13,24 @@
     height: calc(100% - 56.25vw - 20px);
     width: 100%;
     border: 2px solid $coralRed;
+    overflow: scroll;
+
+    justify-content: flex-end;
+    min-height: 500px;
+
+    .button {
+      @include button($coralRed, $white);
+      padding: 5px 10px;
+    }
+
+    #messages{
+      overflow: scroll;
+    }
+
+    .messagesend{
+      border: none;
+      font-family: "Montserrat Bold";
+      padding: 5px 10px;
+    }
   }
 }

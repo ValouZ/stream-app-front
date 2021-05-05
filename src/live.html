@@ -21,11 +21,11 @@
     <h1>Stream de <span id="app-streamer"></span></h1>
     <section class="section-stream">
       <section class="video"></section>
-      <section class="chat">
+      <section class="chat flex flex-col">
         <div id="messages"></div>
         <form action="">
-          <input id="msg" type="text">
-          <button id="submit">Envoyer</button>
+          <input id="msg" class="messagesend" type="text" placeholder="Envoyer un message">
+          <button id="submit" class="button">Envoyer</button>
         </form>
       </section>
     </section>
