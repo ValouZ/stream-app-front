@@ -38,7 +38,7 @@ function redirection() {
 }
 
 function dc() {
-  localStorage.removeItem("token");
+  localStorage.clear();
   document.location.href = "/index.html";
 }
 
