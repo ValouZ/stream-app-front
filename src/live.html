@@ -22,7 +22,7 @@
   <main class="main section-user wrap-mobile8 flex flex-col flex-aic">
     <h1>Stream de <span id="app-streamer"></span></h1>
     <section class="section-live">
-      <section class="section-video"><video src=""></video><video src=""></video><video src=""></video></section>
+      <section class="section-video" id="video-grid"><video src=""></video><video src=""></video><video src=""></video></section>
       <section class="viewers"><span id="number-viewers">0</span> viewers</section>
       <section class="chat flex flex-col">
         <div id="messages"></div>
@@ -35,6 +35,7 @@
   </main>
 
 
+  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/live.js"></script>
   <script src="assets/js/wschat.js"></script>
