@@ -54,3 +54,40 @@ function outputUsers(users) {
   console.log(users.length);
   numberOfViewers.textContent = users.length;
 }
+
+//______Pour le live
+
+
+const videoGrid = document.getElementById('video-grid');
+const myVideo = document.createElement('video')
+
+myVideo.muted = true
+
+navigator.mediaDevices.getUserMedia({ 
+  video: true,
+  audio: true
+}).then(stream => {
+  addVideoStream(myVideo, stream)
+  socket.on("roomUsers", ({ room, users }) => {
+    connectToNewUser(users.userId, stream)
+  });
+})
+
+  function connectToNewUser(userId, stream) {
+    const call = myPeer.call(userId, stream)
+    const video = document.createElement('video')
+    call.on('stream', userVideoStream => {
+      addVideoStream(video, userVideoStream)
+    })
+    call.on('close', () => {
+      video.remove()
+    })
+  }
+  
+  function addVideoStream(video, stream) {
+    video.srcObject = stream
+    video.addEventListener('loadedmetadata', () => {
+      video.play()
+    })
+    videoGrid.append(video)
+  }
