@@ -7,7 +7,7 @@
     "start": "parcel src/channels.html src/live.html src/index.html",
     "build": "parcel build src/channels.html src/live.html src/index.html",
     "caca": "concurrently \"peerjs --port 3001\" \"parcel src/channels.html src/live.html src/index.html\"",
-    "cacBuild": "concurrently \"peerjs --port 3001\" \"parcel build src/channels.html src/live.html src/index.html\""
+    "cacaBuild": "concurrently \"peerjs --port 3001\" \"parcel build src/channels.html src/live.html src/index.html\""
   },
   "keywords": [],
   "author": "",
