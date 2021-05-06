@@ -36,7 +36,7 @@ submit.addEventListener("click", function (e) {
 });
 
 socket.on("chat message", function (msgObject) {
-  console.log(msgObject);
+  console.log(msgObject);;
   let p = document.createElement("p");
   p.innerHTML = `<span style=color:${msgObject.color}> ${msgObject.username}</span> : ${msgObject.msg}`;
   messages.appendChild(p);
