@@ -12,13 +12,14 @@ function displayUsers() {
     method: "GET",
     headers: headers,
   };
+
   let api = "http://localhost:8080/users";
 
-  let username = localStorage.getItem("username");
   fetch(api, request)
     .then((response) => response.json())
     .then(function (data) {
       data.forEach((data) => {
+        let username = localStorage.getItem("username");
         if (data.username !== username) {
           let name = data.username;
           let stream = document.createElement("a");
@@ -29,7 +30,6 @@ function displayUsers() {
           let streamer = document.createElement("h2");
           streamer.classList.add("stream__user");
           let streamerContent = document.createTextNode(name);
-
           streamer.appendChild(streamerContent);
           stream.appendChild(streamer);
           streamsSection.appendChild(stream);

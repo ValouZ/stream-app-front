@@ -4,6 +4,7 @@ const qs = require("qs");
 const msg = document.querySelector("#msg");
 const submit = document.querySelector("#submit");
 const messages = document.querySelector("#messages");
+const numberOfViewers = document.querySelector("#number-viewers");
 
 const username = localStorage.getItem("username");
 const userId = localStorage.getItem("userId");
@@ -37,7 +38,7 @@ submit.addEventListener("click", function (e) {
 socket.on("chat message", function (msgObject) {
   console.log(msgObject);
   let p = document.createElement("p");
-  p.innerHTML = `<p> <span style=color:${msgObject.color}> ${msgObject.username}</span> : ${msgObject.msg} </p>`;
+  p.innerHTML = `<span style=color:${msgObject.color}> ${msgObject.username}</span> : ${msgObject.msg}`;
   messages.appendChild(p);
 
   //scroll down
@@ -50,5 +51,6 @@ function outputUsers(users) {
   //   userList.innerHTML = `
   //     ${users.map((user) => `<li> ${user.username}</li>`).join('')}
   // `;
-  // console.log(users);
+  console.log(users.length);
+  numberOfViewers.textContent = users.length;
 }

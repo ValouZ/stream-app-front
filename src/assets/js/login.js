@@ -33,7 +33,6 @@ function login() {
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("token", data.token);
         localStorage.setItem("color", userColors[index]);
-        console.log(localStorage.getItem("color"));
         document.location.href = "/channels.html";
       }
     });
