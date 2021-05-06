@@ -25,8 +25,8 @@ function login() {
     headers: headers,
   };
 
-  // fetch("http://localhost:8080/users/login", request)
-  fetch("https://nameless-falls-18273.herokuapp.com/users/login", request)
+  fetch("http://localhost:8080/users/login", request)
+  // fetch("https://nameless-falls-18273.herokuapp.com/users/login", request)
     .then((response) => response.json())
     .then(function (data) {
       if (data.token) {

@@ -10,7 +10,9 @@ const username = localStorage.getItem("username");
 const userId = localStorage.getItem("userId");
 const room = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
 
-const socket = io("https://nameless-falls-18273.herokuapp.com", {
+
+// const socket = io("https://nameless-falls-18273.herokuapp.com", {
+const socket = io("http://localhost:8080/", {
   withCredentials: true,
   "Access-Control-Allow-Credentials": true,
 });
@@ -36,6 +38,7 @@ myPeer.on('open', id =>{
     room: room,
     color: localStorage.getItem("color"),
   })
+  console.log("creation Mypeer");
 });
 
 
@@ -80,7 +83,7 @@ function outputUsers(users) {
 }
 
 
-
+//______Pour le live
 
 myVideo.muted = true;
 
@@ -92,25 +95,36 @@ navigator.mediaDevices
   .then((stream) => {
     console.log("suceess");
     addVideoStream(myVideo, stream);
-    socket.on("roomUsers", ({ room, users }) => {
-      connectToNewUser(users, stream);
+
+    console.log("avant call");
+
+    myPeer.on('call', (call) => {
+      console.log("call");
+      call.answer(stream)
     })
+
+    socket.on("user-connected", userId => {
+      console.log("message");
+      connectToNewUser(userId, stream);
+    })
+
   })
   .catch(e => {
     console.log("erreur: ", e);
   });
 
-function connectToNewUser(users, stream) {
-  for(let i=0; i<users.length; i++){
-    const call = myPeer.call(users[i].id, stream);
+function connectToNewUser(userId, stream) {
+  console.log("UserId : " + userId);
+    const call = myPeer.call(userId, stream);
+    console.log(call);
     const video = document.createElement("video");
-    call.on("stream", (userVideoStream) => {
+    call.on('stream', (userVideoStream) => {
+      console.log(userVideoStream);
       addVideoStream(video, userVideoStream);
     });
-    call.on("close", () => {
+    call.on('close', () => {
       video.remove();
     });
-  }
 }
 
 function addVideoStream(video, stream) {
