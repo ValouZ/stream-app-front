@@ -58,7 +58,14 @@ function outputUsers(users) {
 //______Pour le live
 
 const videoGrid = document.getElementById("video-grid");
+console.log(videoGrid);
 const myVideo = document.createElement("video");
+// const myPeer = new Peer(10, {
+//   host: '/',
+//   port: '3001'
+// })
+// console.log(myPeer);
+
 
 myVideo.muted = true;
 
@@ -68,21 +75,27 @@ navigator.mediaDevices
     audio: true,
   })
   .then((stream) => {
+    console.log("suceess");
     addVideoStream(myVideo, stream);
     socket.on("roomUsers", ({ room, users }) => {
-      connectToNewUser(users.userId, stream);
-    });
+      connectToNewUser(users, stream);
+    })
+  })
+  .catch(e => {
+    console.log("e: ", e);
   });
 
-function connectToNewUser(userId, stream) {
-  const call = myPeer.call(userId, stream);
-  const video = document.createElement("video");
-  call.on("stream", (userVideoStream) => {
-    addVideoStream(video, userVideoStream);
-  });
-  call.on("close", () => {
-    video.remove();
-  });
+function connectToNewUser(users, stream) {
+  for(let i=0; i<users.length; i++){
+    const call = myPeer.call(users[i].id, stream);
+    const video = document.createElement("video");
+    call.on("stream", (userVideoStream) => {
+      addVideoStream(video, userVideoStream);
+    });
+    call.on("close", () => {
+      video.remove();
+    });
+  }
 }
 
 function addVideoStream(video, stream) {
