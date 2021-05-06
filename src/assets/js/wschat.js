@@ -15,12 +15,36 @@ const socket = io("https://nameless-falls-18273.herokuapp.com", {
   "Access-Control-Allow-Credentials": true,
 });
 
-socket.emit("joinRoom", {
-  id: userId,
-  username: username,
-  room: room,
-  color: localStorage.getItem("color"),
+
+//______Pour le live
+
+const videoGrid = document.getElementById("video-grid");
+console.log(videoGrid);
+const myVideo = document.createElement("video");
+const myPeer = new Peer(userId, {
+  host: '/',
+  port: '3001'
+})
+console.log(myPeer);
+
+
+
+myPeer.on('open', id =>{
+  socket.emit("joinRoom", {
+    id: userId,
+    username: username,
+    room: room,
+    color: localStorage.getItem("color"),
+  })
 });
+
+
+// socket.emit("joinRoom", {
+//   id: userId,
+//   username: username,
+//   room: room,
+//   color: localStorage.getItem("color"),
+// });
 
 // Recupérer room et users
 socket.on("roomUsers", ({ room, users }) => {
@@ -55,16 +79,7 @@ function outputUsers(users) {
   numberOfViewers.textContent = users.length;
 }
 
-//______Pour le live
 
-const videoGrid = document.getElementById("video-grid");
-console.log(videoGrid);
-const myVideo = document.createElement("video");
-// const myPeer = new Peer(10, {
-//   host: '/',
-//   port: '3001'
-// })
-// console.log(myPeer);
 
 
 myVideo.muted = true;
@@ -82,7 +97,7 @@ navigator.mediaDevices
     })
   })
   .catch(e => {
-    console.log("e: ", e);
+    console.log("erreur: ", e);
   });
 
 function connectToNewUser(users, stream) {
