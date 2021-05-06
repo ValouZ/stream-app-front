@@ -10,7 +10,7 @@ const username = localStorage.getItem("username");
 const userId = localStorage.getItem("userId");
 const room = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
 
-const socket = io("http://localhost:8080", {
+const socket = io("https://nameless-falls-18273.herokuapp.com", {
   withCredentials: true,
   "Access-Control-Allow-Credentials": true,
 });

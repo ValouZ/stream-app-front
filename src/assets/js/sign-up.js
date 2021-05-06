@@ -23,7 +23,7 @@ function signUp() {
     headers: headers,
   };
 
-  fetch("http://localhost:8080/users/create", request)
+  fetch("https://nameless-falls-18273.herokuapp.com/users/create", request)
     .then((response) => response.json())
     .then(function (data) {
       if (data.username) {

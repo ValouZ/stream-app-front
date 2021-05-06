@@ -57,7 +57,8 @@ function displayUserName() {
     headers: headers,
   };
   let idUser = localStorage.getItem("userId");
-  let api = "http://localhost:8080/users/" + idUser;
+  let api = "https://nameless-falls-18273.herokuapp.com/users/" + idUser;
+  // let api = "http://localhost:8080/users/" + idUser;
   let userSpan = document.querySelector("#app-user");
 
   fetch(api, request)
