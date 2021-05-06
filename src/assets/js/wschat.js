@@ -36,7 +36,7 @@ submit.addEventListener("click", function (e) {
 });
 
 socket.on("chat message", function (msgObject) {
-  console.log(msgObject);;
+  console.log(msgObject);
   let p = document.createElement("p");
   p.innerHTML = `<span style=color:${msgObject.color}> ${msgObject.username}</span> : ${msgObject.msg}`;
   messages.appendChild(p);
@@ -57,37 +57,38 @@ function outputUsers(users) {
 
 //______Pour le live
 
+const videoGrid = document.getElementById("video-grid");
+const myVideo = document.createElement("video");
 
-const videoGrid = document.getElementById('video-grid');
-const myVideo = document.createElement('video')
+myVideo.muted = true;
 
-myVideo.muted = true
-
-navigator.mediaDevices.getUserMedia({ 
-  video: true,
-  audio: true
-}).then(stream => {
-  addVideoStream(myVideo, stream)
-  socket.on("roomUsers", ({ room, users }) => {
-    connectToNewUser(users.userId, stream)
+navigator.mediaDevices
+  .getUserMedia({
+    video: true,
+    audio: true,
+  })
+  .then((stream) => {
+    addVideoStream(myVideo, stream);
+    socket.on("roomUsers", ({ room, users }) => {
+      connectToNewUser(users.userId, stream);
+    });
   });
-})
 
-  function connectToNewUser(userId, stream) {
-    const call = myPeer.call(userId, stream)
-    const video = document.createElement('video')
-    call.on('stream', userVideoStream => {
-      addVideoStream(video, userVideoStream)
-    })
-    call.on('close', () => {
-      video.remove()
-    })
-  }
-  
-  function addVideoStream(video, stream) {
-    video.srcObject = stream
-    video.addEventListener('loadedmetadata', () => {
-      video.play()
-    })
-    videoGrid.append(video)
-  }
+function connectToNewUser(userId, stream) {
+  const call = myPeer.call(userId, stream);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    addVideoStream(video, userVideoStream);
+  });
+  call.on("close", () => {
+    video.remove();
+  });
+}
+
+function addVideoStream(video, stream) {
+  video.srcObject = stream;
+  video.addEventListener("loadedmetadata", () => {
+    video.play();
+  });
+  videoGrid.append(video);
+}
