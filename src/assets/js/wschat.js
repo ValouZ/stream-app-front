@@ -11,8 +11,8 @@ const userId = localStorage.getItem("userId");
 const room = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
 
 
-// const socket = io("https://nameless-falls-18273.herokuapp.com", {
-const socket = io("http://localhost:8080/", {
+const socket = io("https://nameless-falls-18273.herokuapp.com", {
+// const socket = io("http://localhost:8080/", {
   withCredentials: true,
   "Access-Control-Allow-Credentials": true,
 });
@@ -98,9 +98,13 @@ navigator.mediaDevices
 
     console.log("avant call");
 
-    myPeer.on('call', (call) => {
+    myPeer.on('call', call => {
       console.log("call");
       call.answer(stream)
+      const video = document.createElement('video')
+      call.on('stream', userVideoStream => {
+        addVideoStream(video, userVideoStream)
+      })
     })
 
     socket.on("user-connected", userId => {
@@ -118,10 +122,12 @@ function connectToNewUser(userId, stream) {
     const call = myPeer.call(userId, stream);
     console.log(call);
     const video = document.createElement("video");
-    call.on('stream', (userVideoStream) => {
+    console.log("avant stream");
+    call.on('stream', function(userVideoStream) {
       console.log(userVideoStream);
       addVideoStream(video, userVideoStream);
     });
+    console.log("entre les 2");
     call.on('close', () => {
       video.remove();
     });
