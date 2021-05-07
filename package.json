@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/channels.html src/live.html src/index.html",
-    "build": "parcel build src/channels.html src/live.html src/index.html"
+    "build": "parcel build src/channels.html src/live.html src/index.html",
+    "caca": "concurrently \"peerjs --port 3001\" \"parcel src/channels.html src/live.html src/index.html\"",
+    "cacaBuild": "concurrently \"peerjs --port 3001\" \"parcel build src/channels.html src/live.html src/index.html\""
   },
   "keywords": [],
   "author": "",
@@ -15,7 +17,9 @@
     "sass": "^1.32.12"
   },
   "dependencies": {
+    "concurrently": "^6.0.2",
     "jsonwebtoken": "^8.5.1",
+    "peer": "^0.6.1",
     "qs": "^6.10.1",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1"
