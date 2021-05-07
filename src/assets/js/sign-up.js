@@ -28,7 +28,7 @@ function signUp() {
     .then((response) => response.json())
     .then(function (data) {
       if (data.username) {
-        document.location.href="/index.html?created";
+        document.location.href="/index.html";
       }
     });
 }

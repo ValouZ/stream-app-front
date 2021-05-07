@@ -65,6 +65,7 @@ function displayUserName() {
     .then((response) => response.json())
     .then(function (data) {
       localStorage.setItem("username", data.username);
+      userSpan.style.color = localStorage.getItem("color");
       userSpan.textContent = data.username;
     });
 }

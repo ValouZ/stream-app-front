@@ -57,6 +57,12 @@ ul {
   }
 }
 
+.log-title {
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-family: "Montserrat Bold";
+}
+
 .link {
   font-size: 1rem;
 
@@ -92,5 +98,18 @@ ul {
 @include under-tablet {
   .wrap-mobile8 {
     @include wrap-mobile(8);
+  }
+}
+
+.section-error {
+  display: flex;
+  justify-content: center;
+  background: darken($color: $coralRed, $amount: 30);
+  color: $white;
+  width: 100%;
+  margin-top: 20px;
+
+  p {
+    padding: 10px 0;
   }
 }

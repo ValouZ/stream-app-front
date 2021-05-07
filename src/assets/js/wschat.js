@@ -145,11 +145,11 @@ navigator.mediaDevices
 //   console.log(peers[userId]);
 //   }, 3000);
 
-  
 // }
 
 function addVideoStream(video, stream) {
   video.srcObject = stream;
+  video.style.borderColor = localStorage.getItem("color");
   video.addEventListener("loadedmetadata", () => {
     video.play();
   });

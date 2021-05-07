@@ -2,6 +2,22 @@ const loginButton = document.getElementById("app-submit");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
+// const userColors = {};
+
+// userColors['cyan'] = "#E93D4F";
+// userColors['redCoral'] = "#E93D4F";
+// userColors['orange'] = "#EA4A21";
+// userColors['yellow'] = "#EFE740";
+// userColors['flashyGreen'] = "#01FF6E";
+// userColors['pink'] = "#ff34f0";
+// userColors['paleBlue'] = "#a4a1ff";
+// userColors['palePink'] = "#ffa1c2";
+// userColors['flashOrange'] = "#f08c1c";
+// userColors['paleGreen'] = "#88f679";
+// userColors['palePurple'] = "#d35dff";
+// userColors['blue'] = "#00c9ff";
+// userColors['purple'] = "#ba00ff";
+// userColors['pastelGreen'] = "#48e391";
 const cyan = "#01FF6E";
 const redCoral = "#E93D4F";
 const orange = "#EA4A21";
@@ -64,6 +80,10 @@ function login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("color", userColors[index]);
         document.location.href = "/channels.html";
+      } else {
+        document.querySelector(
+          "#app-error"
+        ).innerHTML = `<p> ${data.error} </p>`;
       }
     });
 }
