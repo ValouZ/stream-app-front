@@ -2,7 +2,9 @@ const loginButton = document.getElementById("app-submit");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
-const userColors = ["#01FF6E", "#EFE740", "#EA4A21", "#E93D4F", "#7CEAEA"];
+const cyan = "#01FF6E";
+
+const userColors = [cyan, "#EFE740", "#EA4A21", "#E93D4F", "#7CEAEA"];
 
 loginButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -26,7 +28,7 @@ function login() {
   };
 
   fetch("http://localhost:8080/users/login", request)
-  // fetch("https://nameless-falls-18273.herokuapp.com/users/login", request)
+    // fetch("https://nameless-falls-18273.herokuapp.com/users/login", request)
     .then((response) => response.json())
     .then(function (data) {
       if (data.token) {

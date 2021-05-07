@@ -10,44 +10,39 @@ const username = localStorage.getItem("username");
 const userId = localStorage.getItem("userId");
 const room = qs.parse(location.search, { ignoreQueryPrefix: true }).room;
 
-
 const socket = io("https://nameless-falls-18273.herokuapp.com", {
-// const socket = io("http://localhost:8080/", {
+  // const socket = io("http://localhost:8080/", {
   withCredentials: true,
   "Access-Control-Allow-Credentials": true,
 });
-
 
 //______Pour le live
 
 const videoGrid = document.getElementById("video-grid");
 console.log(videoGrid);
 const myVideo = document.createElement("video");
-const myPeer = new Peer(userId, {
-  host: '/',
-  port: '3001'
-})
-console.log(myPeer);
+// const myPeer = new Peer(userId, {
+//   host: '/',
+//   port: '3001'
+// })
+// console.log(myPeer);
 
-
-
-myPeer.on('open', id =>{
-  socket.emit("joinRoom", {
-    id: userId,
-    username: username,
-    room: room,
-    color: localStorage.getItem("color"),
-  })
-  console.log("creation Mypeer");
-});
-
-
-// socket.emit("joinRoom", {
-//   id: userId,
-//   username: username,
-//   room: room,
-//   color: localStorage.getItem("color"),
+// myPeer.on('open', id =>{
+//   socket.emit("joinRoom", {
+//     id: userId,
+//     username: username,
+//     room: room,
+//     color: localStorage.getItem("color"),
+//   })
+//   console.log("creation Mypeer");
 // });
+
+socket.emit("joinRoom", {
+  id: userId,
+  username: username,
+  room: room,
+  color: localStorage.getItem("color"),
+});
 
 // Recupérer room et users
 socket.on("roomUsers", ({ room, users }) => {
@@ -82,7 +77,6 @@ function outputUsers(users) {
   numberOfViewers.textContent = users.length;
 }
 
-
 //______Pour le live
 
 myVideo.muted = true;
@@ -96,42 +90,41 @@ navigator.mediaDevices
     console.log("suceess");
     addVideoStream(myVideo, stream);
 
-    console.log("avant call");
+    // console.log("avant call");
 
-    myPeer.on('call', call => {
-      console.log("call");
-      call.answer(stream)
-      const video = document.createElement('video')
-      call.on('stream', userVideoStream => {
-        addVideoStream(video, userVideoStream)
-      })
-    })
+    // myPeer.on('call', call => {
+    //   console.log("call");
+    //   call.answer(stream)
+    //   const video = document.createElement('video')
+    //   call.on('stream', userVideoStream => {
+    //     addVideoStream(video, userVideoStream)
+    //   })
+    // })
 
-    socket.on("user-connected", userId => {
-      console.log("message");
-      connectToNewUser(userId, stream);
-    })
-
+    // socket.on("user-connected", userId => {
+    //   console.log("message");
+    //   connectToNewUser(userId, stream);
+    // })
   })
-  .catch(e => {
+  .catch((e) => {
     console.log("erreur: ", e);
   });
 
-function connectToNewUser(userId, stream) {
-  console.log("UserId : " + userId);
-    const call = myPeer.call(userId, stream);
-    console.log(call);
-    const video = document.createElement("video");
-    console.log("avant stream");
-    call.on('stream', function(userVideoStream) {
-      console.log(userVideoStream);
-      addVideoStream(video, userVideoStream);
-    });
-    console.log("entre les 2");
-    call.on('close', () => {
-      video.remove();
-    });
-}
+// function connectToNewUser(userId, stream) {
+//   console.log("UserId : " + userId);
+//   const call = myPeer.call(userId, stream);
+//   console.log(call);
+//   const video = document.createElement("video");
+//   console.log("avant stream");
+//   call.on("stream", function (userVideoStream) {
+//     console.log(userVideoStream);
+//     addVideoStream(video, userVideoStream);
+//   });
+//   console.log("entre les 2");
+//   call.on("close", () => {
+//     video.remove();
+//   });
+// }
 
 function addVideoStream(video, stream) {
   video.srcObject = stream;
