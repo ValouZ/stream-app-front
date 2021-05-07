@@ -13,8 +13,8 @@ function displayUsers() {
     headers: headers,
   };
 
-  // let api = "https://nameless-falls-18273.herokuapp.com/users";
-  let api = "http://localhost:8080/users/";
+  let api = "https://nameless-falls-18273.herokuapp.com/users";
+  // let api = "http://localhost:8080/users/";
   
 
   fetch(api, request)
