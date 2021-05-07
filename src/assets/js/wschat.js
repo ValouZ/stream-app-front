@@ -21,28 +21,28 @@ const socket = io("https://nameless-falls-18273.herokuapp.com", {
 const videoGrid = document.getElementById("video-grid");
 console.log(videoGrid);
 const myVideo = document.createElement("video");
-const myPeer = new Peer(userId, {
-  host: "/",
-  port: "3001",
-});
-console.log(myPeer);
-
-myPeer.on("open", (id) => {
-  socket.emit("joinRoom", {
-    id: userId,
-    username: username,
-    room: room,
-    color: localStorage.getItem("color"),
-  });
-  console.log("creation Mypeer");
-});
-
-// socket.emit("joinRoom", {
-//   id: userId,
-//   username: username,
-//   room: room,
-//   color: localStorage.getItem("color"),
+// const myPeer = new Peer(userId, {
+//   host: "/",
+//   port: "3001",
 // });
+// console.log(myPeer);
+
+// myPeer.on("open", (id) => {
+//   socket.emit("joinRoom", {
+//     id: userId,
+//     username: username,
+//     room: room,
+//     color: localStorage.getItem("color"),
+//   });
+//   console.log("creation Mypeer");
+// });
+
+socket.emit("joinRoom", {
+  id: userId,
+  username: username,
+  room: room,
+  color: localStorage.getItem("color"),
+});
 
 // Recupérer room et users
 socket.on("roomUsers", ({ room, users }) => {
@@ -80,7 +80,7 @@ function outputUsers(users) {
 //______Pour le live
 
 myVideo.muted = true;
-const peers = {};
+// const peers = {};
 
 navigator.mediaDevices
   .getUserMedia({
@@ -88,26 +88,21 @@ navigator.mediaDevices
     audio: true,
   })
   .then((stream) => {
-    console.log("suceess");
     addVideoStream(myVideo, stream);
-
-    console.log("avant call");
-
-    myPeer.on("call", (call) => {
-      console.log("call");
-      call.answer(stream);
-      console.log(stream);
-      const video = document.createElement("video");
-      call.on("stream", (userVideoStream) => {
-        console.log("-------");
-        console.log(call);
-        console.log("-------");
-        addVideoStream(video, userVideoStream);
-      });
-    });
+    // myPeer.on("call", (call) => {
+    //   console.log("call");
+    //   call.answer(stream);
+    //   console.log(stream);
+    //   const video = document.createElement("video");
+    //   call.on("stream", (userVideoStream) => {
+    //     console.log("-------");
+    //     console.log(call);
+    //     console.log("-------");
+    //     addVideoStream(video, userVideoStream);
+    //   });
+    // });
 
     socket.on("user-connected", (userId) => {
-      console.log("message");
       connectToNewUser(userId, stream);
     });
   })
@@ -115,43 +110,43 @@ navigator.mediaDevices
     console.log("erreur: ", e);
   });
 
-socket.on("user-disconected", (userId) => {
-  console.log(userId);
-  if (peers[userId]) {
-    peers[userId].close();
-  }
-});
+// socket.on("user-disconected", (userId) => {
+//   console.log(userId);
+//   if (peers[userId]) {
+//     peers[userId].close();
+//   }
+// });
 
-function connectToNewUser(userId, stream) {
-  setTimeout(() => {
-  console.log("UserId : " + userId);
-  const call = myPeer.call(userId, stream);
-  console.log(call);
-  const video = document.createElement("video");
-  console.log("avant stream");
-  call.on("stream", function (userVideoStream) {
-    console.log(userVideoStream);
-    addVideoStream(video, userVideoStream);
-  });
-  console.log("entre les 2");
-  call.on("close", () => {
-    video.remove();
-  });
-  call.on("error", () => {
-    console.log("ERREUR");
-    setTimeout(() => {
-      connectToNewUser(userId, stream);
-    }, 3000);
-  });
+// function connectToNewUser(userId, stream) {
+//   setTimeout(() => {
+//   console.log("UserId : " + userId);
+//   const call = myPeer.call(userId, stream);
+//   console.log(call);
+//   const video = document.createElement("video");
+//   console.log("avant stream");
+//   call.on("stream", function (userVideoStream) {
+//     console.log(userVideoStream);
+//     addVideoStream(video, userVideoStream);
+//   });
+//   console.log("entre les 2");
+//   call.on("close", () => {
+//     video.remove();
+//   });
+//   call.on("error", () => {
+//     console.log("ERREUR");
+//     setTimeout(() => {
+//       connectToNewUser(userId, stream);
+//     }, 3000);
+//   });
 
-  console.log("peers");
-  peers[userId] = call;
-  console.log(peers);
-  console.log(peers[userId]);
-  }, 3000);
+//   console.log("peers");
+//   peers[userId] = call;
+//   console.log(peers);
+//   console.log(peers[userId]);
+//   }, 3000);
 
   
-}
+// }
 
 function addVideoStream(video, stream) {
   video.srcObject = stream;
