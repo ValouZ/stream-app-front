@@ -3,8 +3,35 @@ const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
 const cyan = "#01FF6E";
+const redCoral = "#E93D4F";
+const orange = "#EA4A21";
+const yellow = "#EFE740";
+const flashyGreen = "#01FF6E";
+const pink = "#ff34f0";
+const paleBlue = "#a4a1ff";
+const palePink = "#ffa1c2";
+const flashOrange = "#f08c1c";
+const paleGreen = "#88f679";
+const palePurple = "#d35dff";
+const blue = "#00c9ff";
+const purple = "#ba00ff";
+const pastelGreen = "#48e391";
 
-const userColors = [cyan, "#EFE740", "#EA4A21", "#E93D4F", "#7CEAEA"];
+const userColors = [
+  cyan,
+  redCoral,
+  orange,
+  yellow,
+  flashyGreen,
+  pink,
+  paleBlue,
+  palePink,
+  flashOrange,
+  palePurple,
+  blue,
+  purple,
+  pastelGreen,
+];
 
 loginButton.addEventListener("click", (e) => {
   e.preventDefault();
